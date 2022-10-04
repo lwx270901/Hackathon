@@ -1,6 +1,24 @@
-cmake_minimum_required(VERSION 3.22)
-project(ThreadPool)
+# CMake entry point
+cmake_minimum_required (VERSION 3.5)
+project (hackathon)
+ 
+## Add headers files
+include_directories (
+	module/
+)
+ 
+set(HEADERS module/SafeQueue.h module/ThreadPool.h)
+ 
+set(SOURCES main.cpp)
 
-set(CMAKE_CXX_STANDARD 14)
-
-add_executable(ThreadPool main.cpp module/SafeQueue.cpp module/SafeQueue.h module/ThreadPool.cpp module/ThreadPool.h)
+SET(CMAKE_CXX_FLAGS -pthread)
+ 
+add_compile_options(
+	-std=c++11
+#        -D_DEBUG
+#        -g
+) 
+ 
+# main.cpp
+add_executable(main ${HEADERS} ${SOURCES})
+target_link_libraries(main)
